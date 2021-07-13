@@ -1,0 +1,12 @@
+#navbar-a {
+    padding-left: 200px;
+}
+
+#navbar-nav {
+    padding-right: 200px;
+    padding-top: 12px;
+}
+
+#navbar-div {
+    box-shadow: 0 0 10px black;
+}
