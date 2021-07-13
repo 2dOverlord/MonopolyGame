@@ -1,0 +1,20 @@
+{% extends 'header/header.html' %}
+{% load static %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/css/main-page.css'%}">
+{% endblock %}
+
+{% block body %}
+    
+    <div id = "MainDiv">
+        <div id = "ImageDiv"> <img src="{% static '/images/MonopolyDesk.jpg' %}" id = "MonopolyDeskImg"> </div>
+        <div id = "TextDiv"> <h1>PLAY THE FIRST</h1> <h2>BASKETBALL MONOPOLY <br> ONLINE GAME</h2> </div>
+        <div id = "buttonDiv"><a href='#'><button id="button"><h2>FIND THE GAME</h2></button></a></div>
+    </div>
+
+{% endblock %}

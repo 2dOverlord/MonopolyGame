@@ -1,0 +1,132 @@
+.main-market-div{
+    margin-left: 215px;
+    margin-right: 215px;
+}
+
+.user-lots{
+    box-shadow: 0 0 10px black;
+}
+.user-lots h4{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 25px;
+    padding-top: 15px;
+    margin-left: 15px;
+}
+
+.show-user-lots{
+
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.market-lots{
+    box-shadow: 0 0 10px black;
+    margin-top: 50px;
+    width: 1020px;
+
+}
+
+#market-lots-textdiv{
+    display: flex;
+    margin-left: 15px;
+    padding-top: 15px;
+
+}
+
+.market-lots-h6{
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 15px;
+}
+
+#market-lots-h6-1{
+    margin-left: 0px;
+}
+
+#market-lots-h6-2{
+    margin-left: 610px;
+}
+
+#market-lots-h6-3{
+    margin-left: 50px;
+}
+
+.market-lot{
+    border-top: 1px solid black;
+    margin-left: 15px;
+    display:flex;
+}
+
+.item-image{
+    margin-top:10px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px gold;
+}
+
+.item-h4{
+    margin-left: 20px;
+}
+
+.tp{
+    display: flex;
+}
+
+.balance{
+    margin-top:50px;
+    margin-left: 55px;
+    width: 160px;
+    box-shadow: 0 0 10px black;
+    height: 80px;
+
+}
+
+.balance h5{
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+.item-h6{
+    margin-left: 20px;
+}
+.item-count-price{
+    display: flex;
+}
+.item-count{
+    margin-left: 415px;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.item-price{
+    margin-left: 50px;
+    margin-top: 15px;
+}
+
+.filters{
+    margin-left: 55px;
+    margin-top: 25px;
+    box-shadow: 0 0 10px black;
+    position: absolute;
+    width: 160px;
+}
+
+.filters h6{
+    font-size:17px;
+    margin-left: 5px;
+    padding-top: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.filter-description{
+    border-top: 1px solid black;
+}
+.filter-btn{
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.sucess-btn{
+    margin-left: 5px;
+    margin-bottom: 15px;
+
+}

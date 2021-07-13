@@ -1,0 +1,48 @@
+.main-div {
+    margin-left: 215px;
+    margin-right: 215px;
+    font-size: 20px;
+    background-color: whitesmoke;
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 200px;
+    box-shadow: 0 0 10px black;
+}
+
+.main-div-header {
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+#main-div-header-button{
+    margin-left: 820px;
+}
+.main-div-body{
+
+}
+
+.main-game-div{
+    border-top: 1px solid black;
+    height: 150px;
+    background-color: whitesmoke;
+    display: flex;
+}
+
+.player-icons{
+    padding-top: 15px;
+    padding-left: 15px;
+
+}
+
+.player-icons svg{
+    margin-inline: 10px;
+}
+
+.game-info{
+    margin-left: 135px;
+    margin-top: 25px;
+
+}
+.edit-icons{
+    margin-left: 80px;
+    margin-top: 15px;
+}

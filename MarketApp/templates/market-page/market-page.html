@@ -1,0 +1,134 @@
+{% extends 'header/header.html' %}
+{% load static %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/css/market-page.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Oswald:wght@200&display=swap" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+    <div class = "main-market-div">
+        <div class = "user-lots">
+            <h4>Мои лоты на продажу</h4>
+            <div class = "show-user-lots">
+               У вас нет предметов, выставленных на продажу через Маркет. Вы можете продать предметы из инвентаря.
+            </div>
+        </div>
+        <div class = "tp">
+            <div class="market-lots">
+            <div id = "market-lots-textdiv">
+                <h6 class = "market-lots-h6" id = "market-lots-h6-1">
+                    НАЗВАНИЕ
+                </h6>
+                <h6 class = "market-lots-h6" id = "market-lots-h6-2">
+                    КОЛ-ВО
+                </h6>
+                <h6 class = "market-lots-h6" id = "market-lots-h6-3">
+                    ЦЕНА
+                </h6>
+            </div>
+            <div class = "market-lots-groups">
+                <div class = "market-lot">
+                    <img class = "item-image" src = "{% static '/images/messi.jpg' %}" width="90" height="90">
+                    <div class = "item-description">
+                        <h4 class = "item-h4">
+                            Item name
+                        </h4>
+                        <h6 class = "item-h6">
+                            Some item description
+                        </h6>
+                    </div>
+                    <div class="item-count-price">
+                        <h6 class = "item-count">
+                            100000
+                        </h6>
+                        <h6 class = "item-price">
+                            От 20000
+                            <button type="button" class="btn btn-success">Купить</button>
+                        </h6>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            <div>
+                <div class = "balance">
+                    Ваш баланс
+                    <h5>NNN.NN dollars</h5>
+                </div>
+                <div class = "filters">
+                    <h6>
+                        Поиск
+                    </h6>
+                    <div class = "filter-description">
+                        <h6>
+                        Filter name
+                        </h6>
+                        <div class = "filter-btn">
+                             <div class="btn-group">
+                                  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    +
+                                  </button>
+                                  <div class="dropdown-menu">
+                                  </div>
+                            </div>
+                        </div>
+                    </div><div class = "filter-description">
+                        <h6>
+                        Filter name
+                        </h6>
+                        <div class = "filter-btn">
+                             <div class="btn-group">
+                                  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    +
+                                  </button>
+                                  <div class="dropdown-menu">
+
+                                  </div>
+                            </div>
+                        </div>
+                    </div><div class = "filter-description">
+                        <h6>
+                        Filter name
+                        </h6>
+                        <div class = "filter-btn">
+                             <div class="btn-group">
+                                  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    +
+                                  </button>
+                                  <div class="dropdown-menu">
+
+                                  </div>
+                            </div>
+                        </div>
+                    </div><div class = "filter-description">
+                        <h6>
+                        Filter name
+                        </h6>
+                        <div class = "filter-btn">
+                             <div class="btn-group">
+                                  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    +
+                                  </button>
+                                  <div class="dropdown-menu">
+
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sucess-btn">
+                        <button type="button" class="btn btn-success">Найти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
