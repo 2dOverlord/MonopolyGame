@@ -2,13 +2,13 @@ from django.db import models
 from UserApp.models import CustomUser
 
 ITEM_TYPES = (
-    [1, 'ONE'],
-    [2, 'TWO']
+    ["1", 'ONE'],
+    ["2", 'TWO']
 )
 
 RARITIES = [
-    [0, 'RARE'],
-    [1, 'NOT RARE']
+    ["0", 'RARE'],
+    ['1', 'NOT RARE']
 ]
 
 class Item(models.Model):
@@ -25,4 +25,5 @@ class Item(models.Model):
     )
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     on_sale = models.BooleanField(default=False, null=False)
-    price = models.DecimalField(decimal_places=2, null=True, max_digits=5)
+    price = models.DecimalField(decimal_places=2, null=True, blank=True, max_digits=5)
+    image = models.ImageField(null=True, blank=True)

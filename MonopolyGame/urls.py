@@ -21,5 +21,4 @@ urlpatterns = [
     path('', include('UserApp.urls')),
     path('market/', include('MarketApp.urls')),
     path('games/', include('GameApp.urls')),
-    path('user/', include('UserApp.urls')),
 ]

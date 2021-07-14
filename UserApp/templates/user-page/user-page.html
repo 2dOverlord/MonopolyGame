@@ -11,48 +11,47 @@ User page
 
 {% block body %}
     <div id = MainDiv>
-        <div id = "ProfilePictureDiv"> <img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>
+        <div id = "ProfilePictureDiv"> <img src="{{ object.image }}" class = "ProfilePicture"> </div>
         <div id = "ProfileDescriptionDiv">
-            <div Id = "ProfileNameDiv"> <h1>NickName</h1> <h2>Name Surname</h2> </div>
+            <div Id = "ProfileNameDiv"> <h1>{{ object.username }}</h1> <h2>{{ object.first_name }} {{ object.last_name }}</h2> </div>
             <div id = "ProfileButtonDiv"><a href='#'><button class="Button"><h3>Edit</h3></button></a></div>
             <div id = "ProfileStatisticDiv">
                 <div id = "ProfileBattles"><h2>Battles</h2><h2>170</h2></div>
-                <div id = "ProfileWins"><h2>Wins</h2><h2>50</h2></div>
-                <div id = "ProfileFriends"><h2>Friends</h2><h2>20</h2></div>
-                <div id = "ProfileFriendsPictures">
-                    <div id = "ProfileFriendPicture1"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>
-                    <div id = "ProfileFriendPicture2"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>
+                <div id = "ProfileWins">
+                    <h2>Wins</h2>
+                    <h2>50</h2>
                 </div>
+                <div id = "ProfileFriends">
+                    <h2>Friends</h2>
+                    <h2>20</h2>
+                </div>
+{#                <div id = "ProfileFriendsPictures">#}
+{#                    <div id = "ProfileFriendPicture1"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>#}
+{#                    <div id = "ProfileFriendPicture2"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>#}
+{#                </div>#}
                 
             </div>
         </div>
         <div id = "ProfileBalanceDiv">
-            <div id = "ProfileBalanceViewDiv"> <h1>Your Balance: <br> 100.12 $</h1> </div>
+            <div id = "ProfileBalanceViewDiv"> <h1>Your Balance: <br> {{ object.balance }} $</h1> </div>
             <div id = "ProfileBalanceControlDiv"><a href='#'><button class="Button"><h2>Control Balance</h2></button></a></div>
         </div>
         
-        <div id = "InventoryDiv" > <h1>Inventory</h1> 
+        <div id = "InventoryDiv" > <h1>Inventory</h1>
+            {% for item in inventory %}
             <div class="ProfileInventoryItems">
-                <div class="ProfileInventoryItemsPicureDiv"> <img src="{% static '/images/ItemLogo.jpg' %}" class="ItemLogo"></div>
-                <div class = "ProfileInventoryItemsDescriptionDiv"><h1>Description</h1> </div>
+                <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image }}" class="ItemLogo"></div>
+                <div class = "ProfileInventoryItemsDescriptionDiv">
+                    <h1>{{ item.item_name }}</h1>
+                    <h1>item type = {{ item.item_type }}</h1>
+                    <h1>rarity = {{ item.rarity }}</h1>
+
+                </div>
                 <div class = "ProfileInventoryItemsLeftDiv"><h4>Quantity left: <br> <h3>100</h3> </h4></div>
                 <div class = "ProfileInventoryItemsPriceDiv"> <h5> Lowest market price: <br> <h4>20$</h4> </h5> </div>
                 <div class = "ProfileInventoryItemsSellDiv"><a href='#'><button class="Button"><h2>Sell</h2></button></a></div>
             </div>
-            <div class="ProfileInventoryItems">
-                <div class="ProfileInventoryItemsPicureDiv"> <img src="{% static '/images/ItemLogo.jpg' %}" class="ItemLogo"></div>
-                <div class = "ProfileInventoryItemsDescriptionDiv"><h1>Description</h1> </div>
-                <div class = "ProfileInventoryItemsLeftDiv"><h4>Quantity left: <br> <h3>100</h3> </h4></div>
-                <div class = "ProfileInventoryItemsPriceDiv"> <h5> Lowest market price: <br> <h4>20$</h4> </h5> </div>
-                <div class = "ProfileInventoryItemsSellDiv"><a href='#'><button class="Button"><h2>Sell</h2></button></a></div>
-            </div>
-            <div class="ProfileInventoryItems">
-               <div class="ProfileInventoryItemsPicureDiv"> <img src="{% static '/images/ItemLogo.jpg' %}" class="ItemLogo"></div>
-                <div class = "ProfileInventoryItemsDescriptionDiv"><h1>Description</h1> </div>
-                <div class = "ProfileInventoryItemsLeftDiv"><h4>Quantity left: <br> <h3>100</h3> </h4></div>
-                <div class = "ProfileInventoryItemsPriceDiv"> <h5> Lowest market price: <br> <h4>20$</h4> </h5> </div>
-                <div class = "ProfileInventoryItemsSellDiv"><a href='#'><button class="Button"><h2>Sell</h2></button></a></div>
-            </div>
+            {% endfor %}
         
         </div>
         
