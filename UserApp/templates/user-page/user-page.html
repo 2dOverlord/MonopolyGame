@@ -11,7 +11,7 @@ User page
 
 {% block body %}
     <div id = MainDiv>
-        <div id = "ProfilePictureDiv"> <img src="{{ object.image }}" class = "ProfilePicture"> </div>
+        <div id = "ProfilePictureDiv"> <img src="{{ object.image.url }}" class = "ProfilePicture"> </div>
         <div id = "ProfileDescriptionDiv">
             <div Id = "ProfileNameDiv"> <h1>{{ object.username }}</h1> <h2>{{ object.first_name }} {{ object.last_name }}</h2> </div>
             <div id = "ProfileButtonDiv"><a href='#'><button class="Button"><h3>Edit</h3></button></a></div>
@@ -40,15 +40,22 @@ User page
         <div id = "InventoryDiv" > <h1>Inventory</h1>
             {% for item in inventory %}
             <div class="ProfileInventoryItems">
-                <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image }}" class="ItemLogo"></div>
+                {% if "0" in item.rarity %} 
+                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge blue;" ></div>
+                {% elif "1" in item.rarity %} 
+                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge red;" ></div>
+                {% elif "2" in item.rarity %} 
+                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge gold;" ></div>
+                {% else %}
+                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" ></div>
+                {% endif %}
+                
                 <div class = "ProfileInventoryItemsDescriptionDiv">
                     <h1>{{ item.item_name }}</h1>
-                    <h1>item type = {{ item.item_type }}</h1>
-                    <h1>rarity = {{ item.rarity }}</h1>
-
+                    <h4>{{ item.item_type }}</h4>
                 </div>
-                <div class = "ProfileInventoryItemsLeftDiv"><h4>Quantity left: <br> <h3>100</h3> </h4></div>
-                <div class = "ProfileInventoryItemsPriceDiv"> <h5> Lowest market price: <br> <h4>20$</h4> </h5> </div>
+                
+                <div class = "ProfileInventoryItemsPriceDiv"> <h5 style="text-align:center;" > Lowest market price: <br> <h4 style="text-align:center;">{{ item.price }}$</h4> </h5> </div>
                 <div class = "ProfileInventoryItemsSellDiv"><a href='#'><button class="Button"><h2>Sell</h2></button></a></div>
             </div>
             {% endfor %}
