@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="item.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom" id = "navbar-div">
+            <a href="" id = "navbar-a" class="d-flex align-items-center text-dark text-decoration-none">
+                <img  src="{% static '/images/logo.jpg' %}" width="200" height="75" class="me-2" viewBox="0 0 118 94" role="img"></img>
+            </a>
+
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" id = "navbar-nav">
+                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'games' %}"><h6>Поиск игры</h6></a>
+                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'market' %}"><h6>Маркетплейс</h6></a>
+                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'register' %}"><h6></h6></a>
+                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'logout' %}"><h6>Вийти</h6></a>
+            </nav>
+
+
+        </div>
+    </header>
+            <!-----------------------------------------------
+            СТАРТ
+            ------------>
+
+            <div class="main-item-div">
+                <div class="main-item-div-div">
+                <div class="main-item-div-image-div">
+                    <img src="2201.jpg" class="main-item-div-image">
+                </div>
+
+                <div class="main-item-text">
+                    <h6 id="main-item-text-title">
+                        Lionel Messi
+                    </h6>
+                    <h6 id="main-item-text-rarity">
+                        Рідкість: контрабанда
+                    </h6>
+                    <h6 id="main-item-text-type">
+                        Тип: гравець
+                    </h6>
+                    <h6 id="main-item-text-collection">
+                        Коллекція: Барселона
+                    </h6>
+                </div>
+                </div>
+
+                <div class="main-item-div-text">
+                    <p id="boost">
+                        Эта карточка увеличивает доход с поля на 2.5% по сравнению с обычным полем.
+                    </p>
+                    <p id="biography">
+                        Ліонель Андрес Мессі Куччиттіні аргентинський футболіст, плеймейкер, нападник.
+                        Наразі вільний агент, останнім клубом була «Барселона».
+                        Рекордсмен за кількістю забитих м'ячів у складі збірної Аргентини та іспанської «Барселони».
+                    </p>
+                </div>
+            </div>
+
+     <div class = "tp">
+            <div class="market-lots">
+            <div id = "market-lots-textdiv">
+                <h6 class = "market-lots-h6" id = "market-lots-h6-1">
+                    НАЗВАНИЕ
+                </h6>
+                <h6 class = "market-lots-h6" id = "market-lots-h6-2">
+                    ПРОДАВЕЦ
+                </h6>
+                <h6 class = "market-lots-h6" id = "market-lots-h6-3">
+                    ЦЕНА
+                </h6>
+            </div>
+            <div class = "market-lots-groups">
+                <div class = "market-lot">
+                    <img class = "item-image" src = "2201.jpg" width="90">
+                    <div class = "item-description">
+                        <h4 class = "item-h4">
+                            Item name
+                        </h4>
+                        <h6 class = "item-h6">
+                            Some item description
+                        </h6>
+                    </div>
+                    <div class="item-count-price">
+                        <h6 class = "item-count">
+                            AVATAR
+                        </h6>
+                        <h6 class = "item-price">
+                            215 $
+                            <button type="button" class="btn btn-success">Купить</button>
+                        </h6>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+            <!-----------------------------------------------
+            ФИНИШ
+            ------------>
+</body>
+</html>
