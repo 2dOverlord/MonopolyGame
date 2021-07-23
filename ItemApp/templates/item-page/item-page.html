@@ -1,53 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{% extends 'header/header.html' %}
+{% load static %}
 
-    <link rel="stylesheet" href="item.css">
+{% block title %}
+    Item-page
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/css/item-page.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-
-</head>
-<body>
-    <header>
-        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom" id = "navbar-div">
-            <a href="" id = "navbar-a" class="d-flex align-items-center text-dark text-decoration-none">
-                <img  src="{% static '/images/logo.jpg' %}" width="200" height="75" class="me-2" viewBox="0 0 118 94" role="img"></img>
-            </a>
-
-            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto" id = "navbar-nav">
-                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'games' %}"><h6>Поиск игры</h6></a>
-                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'market' %}"><h6>Маркетплейс</h6></a>
-                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'register' %}"><h6></h6></a>
-                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'logout' %}"><h6>Вийти</h6></a>
-            </nav>
+{% endblock %}
 
 
-        </div>
-    </header>
-            <!-----------------------------------------------
-            СТАРТ
-            ------------>
 
+{% block body %}
             <div class="main-item-div">
                 <div class="main-item-div-div">
                 <div class="main-item-div-image-div">
-                    <img src="2201.jpg" class="main-item-div-image">
+                    <img src="{{ object.image.url }}" class="main-item-div-image">
                 </div>
 
                 <div class="main-item-text">
                     <h6 id="main-item-text-title">
-                        Lionel Messi
+                        {{ object.item_name }}
                     </h6>
                     <h6 id="main-item-text-rarity">
-                        Рідкість: контрабанда
+                        Рідкість: {{ object.rarity }}
                     </h6>
                     <h6 id="main-item-text-type">
-                        Тип: гравець
+                        Тип: {{ object.item_type }}
                     </h6>
                     <h6 id="main-item-text-collection">
                         Коллекція: Барселона
@@ -106,9 +89,4 @@
             </div>
         </div>
 
-
-            <!-----------------------------------------------
-            ФИНИШ
-            ------------>
-</body>
-</html>
+{% endblock %}
