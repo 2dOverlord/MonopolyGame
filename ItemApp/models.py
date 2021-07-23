@@ -2,13 +2,15 @@ from django.db import models
 from UserApp.models import CustomUser
 
 ITEM_TYPES = (
-    ["1", 'ONE'],
-    ["2", 'TWO']
+    ["Player", 'PLAYER'],
+    ["Manager", 'MANAGER'],
+    ["Team", 'TEAM']
 )
 
 RARITIES = [
-    ["0", 'RARE'],
-    ['1', 'NOT RARE']
+    ["0", 'BASIC'],
+    ['1', 'RARE'],
+    ['2', 'LEGEND']
 ]
 
 class Item(models.Model):
@@ -23,7 +25,14 @@ class Item(models.Model):
         default='NOT RARE',
         max_length=30,
     )
+
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
     on_sale = models.BooleanField(default=False, null=False)
     price = models.DecimalField(decimal_places=2, null=True, blank=True, max_digits=5)
-    image = models.ImageField(null=True, blank=True)
+
+    image = models.ImageField(null=True, blank=True, upload_to='images/')
+
+    @classmethod
+    def get_items_by_owner(cls, owner):
+        return cls.objects.filter(owner=owner)
