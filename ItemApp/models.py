@@ -36,3 +36,7 @@ class Item(models.Model):
     @classmethod
     def get_items_by_owner(cls, owner):
         return cls.objects.filter(owner=owner)
+
+    @classmethod
+    def get_item_by_id(cls, item_id=1):
+        return cls.objects.get(id=item_id)
