@@ -2,66 +2,77 @@
 {% load static %}
 
 {% block title %}
-User page
+    User page
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static '/css/user-page.css'%}">
+    <link rel="stylesheet" href="{% static '/css/user-page.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div id = MainDiv>
-        <div id = "ProfilePictureDiv"> <img src="{{ object.image.url }}" class = "ProfilePicture"> </div>
-        <div id = "ProfileDescriptionDiv">
-            <div Id = "ProfileNameDiv"> <h1>{{ object.username }}</h1> <h2>{{ object.first_name }} {{ object.last_name }}</h2> </div>
-            <div id = "ProfileButtonDiv"><a href='#'><button class="Button"><h3>Edit</h3></button></a></div>
-            <div id = "ProfileStatisticDiv">
-                <div id = "ProfileBattles"><h2>Battles</h2><h2>170</h2></div>
-                <div id = "ProfileWins">
+    <div id=MainDiv>
+
+        <div id="ProfileDescriptionDiv">
+            <div id="ProfileNameDiv"><h1>{{ object.username }}</h1>
+                <h2>{{ object.first_name }} {{ object.last_name }}</h2></div>
+            <div id="ProfileButtonDiv"><a href='#'>
+                <button class="Button"><h3>Edit</h3></button>
+            </a></div>
+            <div id="ProfileStatisticDiv">
+                <div id="ProfileBattles"><h2>Battles</h2>
+                    <h2>170</h2></div>
+                <div id="ProfileWins">
                     <h2>Wins</h2>
                     <h2>50</h2>
                 </div>
-                <div id = "ProfileFriends">
+                <div id="ProfileFriends">
                     <h2>Friends</h2>
                     <h2>20</h2>
                 </div>
-{#                <div id = "ProfileFriendsPictures">#}
-{#                    <div id = "ProfileFriendPicture1"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>#}
-{#                    <div id = "ProfileFriendPicture2"><img src="{% static '/images/ProfilePicture.png' %}" class = "ProfilePicture"> </div>#}
-{#                </div>#}
-                
+
             </div>
         </div>
-        <div id = "ProfileBalanceDiv">
-            <div id = "ProfileBalanceViewDiv"> <h1>Your Balance: <br> {{ object.balance }} $</h1> </div>
-            <div id = "ProfileBalanceControlDiv"><a href='#'><button class="Button"><h2>Control Balance</h2></button></a></div>
+        <div id="ProfileBalanceDiv">
+            <div id="ProfileBalanceViewDiv"><h1>Your Balance: <br> {{ object.balance }} $</h1></div>
+            <div id="ProfileBalanceControlDiv"><a href='#'>
+                <button class="Button"><h2>Control Balance</h2></button>
+            </a></div>
         </div>
-        
-        <div id = "InventoryDiv" > <h1>Inventory</h1>
+
+        <div id="InventoryDiv"><h1>Inventory</h1>
             {% for item in inventory %}
-            <div class="ProfileInventoryItems">
-                {% if "0" in item.rarity %} 
-                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge blue;" ></div>
-                {% elif "1" in item.rarity %} 
-                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge red;" ></div>
-                {% elif "2" in item.rarity %} 
-                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" style="border: 7px ridge gold;" ></div>
-                {% else %}
-                    <div class="ProfileInventoryItemsPicureDiv"> <img src="{{ item.image.url }}" class="ItemLogo" ></div>
-                {% endif %}
-                
-                <div class = "ProfileInventoryItemsDescriptionDiv">
-                    <h1>{{ item.item_name }}</h1>
-                    <h4>{{ item.item_type }}</h4>
+                <div class="ProfileInventoryItems">
+                    {% if "0" in item.rarity %}
+                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
+                                                                         style="border: 7px ridge blue;"></div>
+                    {% elif "1" in item.rarity %}
+                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
+                                                                         style="border: 7px ridge red;"></div>
+                    {% elif "2" in item.rarity %}
+                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
+                                                                         style="border: 7px ridge gold;"></div>
+                    {% else %}
+                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo">
+                        </div>
+                    {% endif %}
+
+                    <div class="ProfileInventoryItemsDescriptionDiv">
+                        <h1>{{ item.item_name }}</h1>
+                        <h4>{{ item.item_type }}</h4>
+                    </div>
+
+                    <div class="ProfileInventoryItemsPriceDiv">
+                        <h5 style="text-align:center;"> Lowest market price: <br> <h4
+                                style="text-align:center;">{{ item.price }}$</h4></h5>
+                    </div>
+                    <div class="ProfileInventoryItemsSellDiv"><a href='#'>
+                        <button class="Button"><h2>Sell</h2></button>
+                    </a></div>
                 </div>
-                
-                <div class = "ProfileInventoryItemsPriceDiv"> <h5 style="text-align:center;" > Lowest market price: <br> <h4 style="text-align:center;">{{ item.price }}$</h4> </h5> </div>
-                <div class = "ProfileInventoryItemsSellDiv"><a href='#'><button class="Button"><h2>Sell</h2></button></a></div>
-            </div>
             {% endfor %}
-        
+
         </div>
-        
+
     </div>
-    
+
 {% endblock %}
