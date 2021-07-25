@@ -11,7 +11,7 @@ class CustomRegistrationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ("email", "username", "first_name", "last_name", "password1", "password2")
+        fields = ("email", "username", "password1", "password2")
 
 
 class CustomUserAuthenticationForm(forms.ModelForm):
