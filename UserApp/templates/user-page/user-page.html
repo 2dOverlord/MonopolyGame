@@ -6,73 +6,44 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static '/css/user-page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user-page.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-    <div id=MainDiv>
-
-        <div id="ProfileDescriptionDiv">
-            <div id="ProfileNameDiv"><h1>{{ object.username }}</h1>
-                <h2>{{ object.first_name }} {{ object.last_name }}</h2></div>
-            <div id="ProfileButtonDiv"><a href='#'>
-                <button class="Button"><h3>Edit</h3></button>
-            </a></div>
-            <div id="ProfileStatisticDiv">
-                <div id="ProfileBattles"><h2>Battles</h2>
-                    <h2>170</h2></div>
-                <div id="ProfileWins">
-                    <h2>Wins</h2>
-                    <h2>50</h2>
+    <div class="MainBlock">
+            <div class="profile-info">
+                <div class="avatar">
+                    <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
                 </div>
-                <div id="ProfileFriends">
-                    <h2>Friends</h2>
-                    <h2>20</h2>
+                <div>
+                    <h6 class="profile-info-h6">
+                        {{ object.username }}
+                    </h6>
+                    <h6 class="profile-info-stats"> STATS WILL BE HERE </h6>
                 </div>
+            </div>
+        <div class="inventory">
+            <div class="inventory-items">
+                {% for small_l in inventory %}
+                    <div class="line">
+                    {% for item in small_l %}
 
+                    <div class="inventory-item-place">
+
+                        <img src="{{ item.image.url }}" class="inventory-item-image">
+
+                        <div class="inventory-item-name">
+                            {{ item.item_name }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        <div id="ProfileBalanceDiv">
-            <div id="ProfileBalanceViewDiv"><h1>Your Balance: <br> {{ object.balance }} $</h1></div>
-            <div id="ProfileBalanceControlDiv"><a href='#'>
-                <button class="Button"><h2>Control Balance</h2></button>
-            </a></div>
-        </div>
-
-        <div id="InventoryDiv"><h1>Inventory</h1>
-            {% for item in inventory %}
-                <div class="ProfileInventoryItems">
-                    {% if "0" in item.rarity %}
-                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
-                                                                         style="border: 7px ridge blue;"></div>
-                    {% elif "1" in item.rarity %}
-                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
-                                                                         style="border: 7px ridge red;"></div>
-                    {% elif "2" in item.rarity %}
-                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo"
-                                                                         style="border: 7px ridge gold;"></div>
-                    {% else %}
-                        <div class="ProfileInventoryItemsPicureDiv"><img src="{{ item.image.url }}" class="ItemLogo">
-                        </div>
-                    {% endif %}
-
-                    <div class="ProfileInventoryItemsDescriptionDiv">
-                        <h1>{{ item.item_name }}</h1>
-                        <h4>{{ item.item_type }}</h4>
-                    </div>
-
-                    <div class="ProfileInventoryItemsPriceDiv">
-                        <h5 style="text-align:center;"> Lowest market price: <br> <h4
-                                style="text-align:center;">{{ item.price }}$</h4></h5>
-                    </div>
-                    <div class="ProfileInventoryItemsSellDiv"><a href='#'>
-                        <button class="Button"><h2>Sell</h2></button>
-                    </a></div>
-                </div>
-            {% endfor %}
-
-        </div>
-
     </div>
 
 {% endblock %}
