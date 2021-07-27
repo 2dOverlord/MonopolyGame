@@ -15,6 +15,7 @@ def render_user_page(request, user_id=1):
 
     user_object = CustomUser.get_user_by_id(user_id=user_id)
     inventory = Item.get_items_by_owner(owner=user_object)
+    inventory = [inventory[i:i+6] for i in range(0, len(inventory), 6)]
 
     context = {
         "object": user_object,

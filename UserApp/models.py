@@ -44,7 +44,7 @@ class CustomUser(AbstractBaseUser):
 
     email = models.EmailField(verbose_name="email", unique=True, max_length=60)
 
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, upload_to='images/')
 
     friends = models.ManyToManyField("self", blank=True, null=True)
 
