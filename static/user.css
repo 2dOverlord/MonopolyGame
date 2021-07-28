@@ -1,4 +1,17 @@
-.MainBlock{
+
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height:100px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.inner__block{
+    background-color: white;
+    height: 58px;
 }
 
 .profile-info{
@@ -62,3 +75,5 @@
     margin-top: 5px;
 
 }
+
+
