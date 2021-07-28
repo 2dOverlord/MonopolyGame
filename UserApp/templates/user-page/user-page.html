@@ -45,10 +45,11 @@
                                 <div class="inner__block">
                                     <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
                                     {{ item.item_name }}
-                                    <form id="sellform{{ item.id }}">
-                                        <label>Enter price:</label>
-                                        <input type="number">
-                                        <input type="submit" id="submitsell{{ item.id }}" value="Submit">
+                                    <form action="/sellitem/{{ item.id }}" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.price }}
+                                        {{ form.item_id }}
+                                        <input type="submit" id="submitsell" value="Submit">
                                         <script>
                                             document.getElementById('hider{{ item.id }}').onclick = function () {
                                                 document.getElementById('popup{{ item.id }}').hidden = false;
