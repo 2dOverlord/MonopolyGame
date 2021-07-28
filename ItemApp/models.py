@@ -40,3 +40,17 @@ class Item(models.Model):
     @classmethod
     def get_item_by_id(cls, item_id=1):
         return cls.objects.get(id=item_id)
+
+    @classmethod
+    def put_item_on_market(cls, item_id, item_price):
+        item = cls.objects.get(id=item_id)
+        item.on_sale = True
+        item.price = item_price
+        item.save()
+        return True
+
+    @classmethod
+    def get_owner_id(cls, item_id):
+        item = cls.objects.get(id=item_id)
+        owner_id = item.owner.get_id()
+        return owner_id

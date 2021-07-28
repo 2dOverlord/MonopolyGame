@@ -63,6 +63,9 @@ class CustomUser(AbstractBaseUser):
 
     objects = CustomAccountManager()
 
+    def get_id(self):
+        return self.id
+
     def __str__(self):
         return self.username
 
@@ -75,6 +78,7 @@ class CustomUser(AbstractBaseUser):
     @classmethod
     def get_user_by_id(cls, user_id=1):
         return cls.objects.get(id=user_id)
+
 
 
 
