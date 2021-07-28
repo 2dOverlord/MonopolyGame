@@ -6,10 +6,11 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'user-page.css' %}">
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+    <script src="{% static '/js/item_sellform.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -37,7 +38,34 @@
 
                         <div class="inventory-item-name">
                             {{ item.item_name }}
+                            <p></p>
+                        {% if user == object and user.is_authenticated %}
+                            <input type="button" id="hider{{ item.id }}" class="btn btn-success" value="SELL" />
+                            <div id="popup{{ item.id }}" class="popup" hidden>
+                                <div class="inner__block">
+                                    <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
+                                    {{ item.item_name }}
+                                    <form id="sellform{{ item.id }}">
+                                        <label>Enter price:</label>
+                                        <input type="number">
+                                        <input type="submit" id="submitsell{{ item.id }}" value="Submit">
+                                        <script>
+                                            document.getElementById('hider{{ item.id }}').onclick = function () {
+                                                document.getElementById('popup{{ item.id }}').hidden = false;
+                                            }
+                                        </script>
+                                        <script>
+                                            document.getElementById('closer{{ item.id }}').onclick = function () {
+                                                document.getElementById('popup{{ item.id }}').hidden = true;
+                                            }
+                                        </script>
+                                    </form>
+                                </div>
+                            </div>
+
+                        {% endif %}
                         </div>
+
                     </div>
                     {% endfor %}
                     </div>
