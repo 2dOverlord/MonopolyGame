@@ -1,0 +1,79 @@
+
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height:100px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.inner__block{
+    background-color: white;
+    height: 58px;
+}
+
+.profile-info{
+    display: flex;
+    margin-left: 215px;
+}
+
+.avatar-image{
+     border: 3px solid #00a8e1;
+}
+
+.profile-info-h6
+{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 35px;
+    margin-left: 30px;
+}
+
+.profile-info-stats
+{
+    margin-top: 125px;
+    margin-left: 30px;
+    font-size: 25px;
+}
+
+.inventory-items{
+
+}
+
+.line{
+    display: flex;
+    max-width: 906px;
+    margin-top: 15px;
+}
+
+.inventory-item-place{
+    border: 3px solid lightblue;
+    border-radius: 10px;
+    background-color: #42AEEC;
+    margin-right: 25px;
+}
+.inventory{
+    margin-top: 100px;
+    margin-left: 215px;
+    margin-right: 215px;
+    display: flex;
+
+}
+
+
+.inventory-item-image{
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+
+}
+
+.inventory-item-name{
+    font-size: 25px;
+    margin-left: 25px;
+    margin-top: 5px;
+
+}
+
+
