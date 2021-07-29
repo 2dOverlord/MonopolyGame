@@ -11,7 +11,11 @@
 
 {% block body %}
     <div id=MainDiv>
-
+        {% if request.user.is_authenticated %}
+                <div id = "ProfilePictureDiv"> <img src="{{ object.image.url }}" class="ProfilePicture"> </div>
+        {% else %}
+            <div id = "ProfilePictureDiv"> <img src="{% static '/images/DefaultProfilePicture.png' %}" class="ProfilePicture" > </div>
+        {% endif %}
         <div id="ProfileDescriptionDiv">
             <div id="ProfileNameDiv"><h1>{{ object.username }}</h1>
                 <h2>{{ object.first_name }} {{ object.last_name }}</h2></div>
