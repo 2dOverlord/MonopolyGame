@@ -1,6 +1,6 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-import datetime
+
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class CustomAccountManager(BaseUserManager):
@@ -42,6 +42,7 @@ class CustomUser(AbstractBaseUser):
     username = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
+
     date_birth = models.DateField(verbose_name="Birth date", null=True, blank=True)
 
     email = models.EmailField(verbose_name="email", unique=True, max_length=60)
@@ -60,7 +61,7 @@ class CustomUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'    # поле яке застосовується при заході в аккаунт
+    USERNAME_FIELD = 'email'  # поле яке застосовується при заході в аккаунт
     REQUIRED_FIELDS = ['username']
 
     objects = CustomAccountManager()
@@ -80,9 +81,3 @@ class CustomUser(AbstractBaseUser):
     @classmethod
     def get_user_by_id(cls, user_id=1):
         return cls.objects.get(id=user_id)
-
-
-
-
-
-
