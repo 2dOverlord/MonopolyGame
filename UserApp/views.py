@@ -47,7 +47,6 @@ def render_register_page(request):
 
         if form.is_valid():
             form.save()
-
             return redirect('main')
         else:
             print('NOT VALID')
