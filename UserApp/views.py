@@ -7,6 +7,8 @@ from ItemApp.models import Item
 
 from .forms import CustomRegistrationForm, CustomUserAuthenticationForm
 from MarketApp.forms import SellForm
+from django.contrib import messages
+
 
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
@@ -47,11 +49,14 @@ def render_register_page(request):
 
         if form.is_valid():
             form.save()
-
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
             return redirect('main')
+
         else:
             print('NOT VALID')
             context['registration_form'] = form
+            
 
     else:
         form = CustomRegistrationForm()
@@ -85,6 +90,8 @@ def render_login(request):
                 login(request, user)
 
                 return redirect('main')
+        else:
+            messages.info(request, 'Username or password is incorrect')
     else:
         form = CustomUserAuthenticationForm()
 
