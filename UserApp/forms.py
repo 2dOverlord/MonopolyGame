@@ -28,3 +28,4 @@ class CustomUserAuthenticationForm(forms.ModelForm):
 
         if not authenticate(email=email, password=password):
             raise forms.ValidationError("Invalid login")
+
