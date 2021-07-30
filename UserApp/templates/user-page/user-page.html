@@ -37,7 +37,7 @@
                         <img src="{{ item.image.url }}" class="inventory-item-image">
 
                         <div class="inventory-item-name">
-                            {{ item.item_name }}
+                            {{ item.name }}
                             <p></p>
                         {% if user == object and user.is_authenticated %}
                             <input type="button" id="hider{{ item.id }}" class="btn btn-success" value="SELL" />

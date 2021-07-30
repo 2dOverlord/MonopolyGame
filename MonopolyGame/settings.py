@@ -80,8 +80,13 @@ WSGI_APPLICATION = 'MonopolyGame.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'monopolygamedb',   # YOUR NAME HERE
+        'USER': 'postgres',     # YOUR USERNAME HERE
+        'PASSWORD': 'pos2137gw_rw',     # YOUR PASSWORD HERE
+        'HOST': 'localhost',
+
+
     }
 }
 
