@@ -19,7 +19,12 @@
     <div class="MainBlock">
             <div class="profile-info">
                 <div class="avatar">
-                    <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
+                    {% if request.user.is_authenticated %}
+                        <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
+                    {% else %}
+                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/DefaultProfilePicture.png' %}">
+                    {% endif %}
+                    
                 </div>
                 <div>
                     <h6 class="profile-info-h6">
