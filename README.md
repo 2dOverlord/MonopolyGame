@@ -11,20 +11,20 @@ python web developer position
 - html/css/javascript
 
 ---------------------
-###How to locally run this project?
+### How to locally run this project?
 ```
 git clone
 pip install -r requirements.txt
 python manage.py runserver
 ```
-###How to use this project?
+### How to use this project?
 
 - Create user with register page
 - Log in
 - Now you can use this site, if you want to create admin user go [**there**]()
 
 ---------------------
-###Authors and roles
+### Authors and roles
 
 - [**Vladyslav Kriuchkovskyi**</br>](https://www.linkedin.com/in/vladyslav-kriuchkovskyi/)
 CEO/Idea author/PM/Back-end/Front-end
