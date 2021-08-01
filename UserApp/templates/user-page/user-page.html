@@ -22,7 +22,7 @@
                     {% if request.user.is_authenticated %}
                         <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
                     {% else %}
-                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/DefaultProfilePicture.png' %}">
+                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/ProfilePicture.png' %}">
                     {% endif %}
                     
                 </div>
@@ -38,43 +38,45 @@
                 {% for small_l in inventory %}
                     <div class="line">
                     {% for item in small_l %}
+                        {% if item.on_sale == False %}
+                            <div class="inventory-item-place">
 
-                    <div class="inventory-item-place">
+                                <img src="{{ item.image.url }}" class="inventory-item-image">
 
-                        <img src="{{ item.image.url }}" class="inventory-item-image">
+                                <div class="inventory-item-name">
+                                    {{ item.name }}
+                                    <p></p>
+                                {% if user == object and user.is_authenticated %}
+                                    <input type="button" id="hider{{ item.id }}" class="btn btn-success" value="SELL" />
+                                    <div id="popup{{ item.id }}" class="popup" hidden>
+                                        <div class="inner__block">
+                                            <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
+                                            {{ item.item_name }}
+                                            <form action="/sellitem/{{ item.id }}" method="POST">
+                                                {% csrf_token %}
+                                                {{ form.price }}
+                                                {{ form.item_id }}
+                                                <input type="submit" id="submitsell" value="Submit">
+                                                <script>
+                                                    document.getElementById('hider{{ item.id }}').onclick = function () {
+                                                        document.getElementById('popup{{ item.id }}').hidden = false;
+                                                    }
+                                                </script>
+                                                <script>
+                                                    document.getElementById('closer{{ item.id }}').onclick = function () {
+                                                        document.getElementById('popup{{ item.id }}').hidden = true;
+                                                    }
+                                                </script>
+                                            </form>
+                                        </div>
+                                    </div>
 
-                        <div class="inventory-item-name">
-                            {{ item.name }}
-                            <p></p>
-                        {% if user == object and user.is_authenticated %}
-                            <input type="button" id="hider{{ item.id }}" class="btn btn-success" value="SELL" />
-                            <div id="popup{{ item.id }}" class="popup" hidden>
-                                <div class="inner__block">
-                                    <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
-                                    {{ item.item_name }}
-                                    <form action="/sellitem/{{ item.id }}" method="POST">
-                                        {% csrf_token %}
-                                        {{ form.price }}
-                                        {{ form.item_id }}
-                                        <input type="submit" id="submitsell" value="Submit">
-                                        <script>
-                                            document.getElementById('hider{{ item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ item.id }}').hidden = false;
-                                            }
-                                        </script>
-                                        <script>
-                                            document.getElementById('closer{{ item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ item.id }}').hidden = true;
-                                            }
-                                        </script>
-                                    </form>
+                                {% endif %}
                                 </div>
+
                             </div>
-
-                        {% endif %}
-                        </div>
-
-                    </div>
+                        {%  endif %}
+                    
                     {% endfor %}
                     </div>
                 {% endfor %}
