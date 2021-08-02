@@ -28,7 +28,7 @@
             <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'market' %}"><h6>Маркетплейс</h6></a>
             <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'register' %}"><h6></h6></a>
             {% if request.user.is_authenticated %}
-                <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'edit' %}"><h6>EditProfile</h6></a>
+                
                 <a href="user/{{ user.id }}">
                 <img src="{{ user.image.url }}" width="75px" height="75px">
                 </a>
