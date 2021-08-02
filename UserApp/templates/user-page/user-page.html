@@ -22,7 +22,7 @@
                     {% if request.user.is_authenticated %}
                         <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
                     {% else %}
-                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/ProfilePicture.png' %}">
+                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/DefaultProfilePicture.png' %}">
                     {% endif %}
                     
                 </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     {% if user == object and user.is_authenticated %}
-                        <button type="button" class="btn btn-warning">✏</button>
+                        <a href="{% url 'edit' %}"><button type="button" class="btn btn-warning">✏</button></a>
                         <a class="btn btn-danger" href="{% url 'logout' %}">❌</a>
                     {% endif %}
                 </div>
@@ -57,7 +57,7 @@
                                     <div id="popup{{ item.id }}" class="popup" hidden>
                                         <div class="inner__block">
                                             <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
-                                            {{ item.item_name }}
+                                            {{ item.name }}
                                             <form action="/sellitem/{{ item.id }}" method="POST">
                                                 {% csrf_token %}
                                                 {{ form.price }}
