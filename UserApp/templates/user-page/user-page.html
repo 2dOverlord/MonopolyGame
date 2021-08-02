@@ -26,8 +26,10 @@
                     <h6 class="profile-info-stats"> STATS WILL BE HERE </h6>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-warning">✏</button>
-                    <button type="button" class="btn btn-danger">❌</button>
+                    {% if user == object and user.is_authenticated %}
+                        <button type="button" class="btn btn-warning">✏</button>
+                        <a class="btn btn-danger" href="{% url 'logout' %}">❌</a>
+                    {% endif %}
                 </div>
             </div>
         <div class="inventory">
