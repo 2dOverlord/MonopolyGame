@@ -8,8 +8,9 @@ from .forms import CustomRegistrationForm, CustomUserAuthenticationForm
 from MarketApp.forms import SellForm
 
 from .models import CustomUser
-from ItemApp.models import Item
+from ItemApp.models import UserItemInterface
 
+from itertools import chain
 
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
@@ -19,8 +20,10 @@ def render_user_page(request, user_id=1):
 
     user_object = CustomUser.get_user_by_id(user_id=user_id)
 
-    inventory = Item.get_items_by_owner(owner=user_object)
-    inventory = [inventory[i:i+6] for i in range(0, len(inventory), 6)]
+    inventory = UserItemInterface.get_items_by_user(user=user_object)
+    inventory = [[obj] * obj.quantity for obj in inventory]
+    inventory = list(chain(*inventory))
+    inventory = [inventory[i:i + 6] for i in range(0, len(inventory), 6)]
 
     form = SellForm()
 

@@ -36,11 +36,12 @@
                     </h6>
                 </div>
                 <div class="market-lots-groups">
+                    {% for item in items %}
                     <div class="market-lot">
-                        <img class="item-image" src="{% static '/images/messi.jpg' %}" width="90" height="90">
+                        <img class="item-image" src="{{ item.image.url }}" width="90" height="90">
                         <div class="item-description">
                             <h4 class="item-h4">
-                                Item name
+                                {{ item.name }}
                             </h4>
                             <h6 class="item-h6">
                                 Some item description
@@ -48,16 +49,17 @@
                         </div>
                         <div class="item-count-price">
                             <h6 class="item-count">
-                                100000
+{#                                {{ item.icount }}#}
                             </h6>
                             <h6 class="item-price">
-                                От 20000
+                                От {{ item.price }}
                                 <button type="button" class="btn btn-success">Купить</button>
                             </h6>
 
                         </div>
 
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             <div>

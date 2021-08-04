@@ -34,36 +34,36 @@
             </div>
         <div class="inventory">
             <div class="inventory-items">
-                {% for small_l in inventory %}
+                {% for line in inventory %}
                     <div class="line">
-                    {% for item in small_l %}
+                    {% for obj in line %}
 
                     <div class="inventory-item-place">
 
-                        <img src="{{ item.image.url }}" class="inventory-item-image">
+                        <img src="{{ obj.item.image.url }}" class="inventory-item-image">
 
                         <div class="inventory-item-name">
-                            {{ item.name }}
+                            {{ obj.item.name }}
                             <p></p>
                         {% if user == object and user.is_authenticated %}
-                            <input type="button" id="hider{{ item.id }}" class="btn btn-success" value="SELL" />
-                            <div id="popup{{ item.id }}" class="popup" hidden>
+                            <input type="button" id="hider{{ obj.item.id }}" class="btn btn-success" value="SELL" />
+                            <div id="popup{{ obj.item.id }}" class="popup" hidden>
                                 <div class="inner__block">
-                                    <input type="button" id="closer{{ item.id }}" class="btn btn-danger" value="CLOSE"/>
-                                    {{ item.item_name }}
-                                    <form action="/sellitem/{{ item.id }}" method="POST">
+                                    <input type="button" id="closer{{ obj.item.id }}" class="btn btn-danger" value="CLOSE"/>
+                                    {{ obj.item.item_name }}
+                                    <form action="/sellitem/{{ obj.item.id }}" method="POST">
                                         {% csrf_token %}
                                         {{ form.price }}
                                         {{ form.item_id }}
                                         <input type="submit" id="submitsell" value="Submit">
                                         <script>
-                                            document.getElementById('hider{{ item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ item.id }}').hidden = false;
+                                            document.getElementById('hider{{ obj.item.id }}').onclick = function () {
+                                                document.getElementById('popup{{ obj.item.id }}').hidden = false;
                                             }
                                         </script>
                                         <script>
-                                            document.getElementById('closer{{ item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ item.id }}').hidden = true;
+                                            document.getElementById('closer{{ obj.item.id }}').onclick = function () {
+                                                document.getElementById('popup{{ obj.item.id }}').hidden = true;
                                             }
                                         </script>
                                     </form>
