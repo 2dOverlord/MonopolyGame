@@ -8,6 +8,8 @@ from .models import CustomUser
 
 class CustomRegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
+    form = CustomUser()
+    pk = form.get_id()
 
     class Meta:
         model = CustomUser
