@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from django.http import HttpResponseRedirect
 
-from .forms import CustomRegistrationForm, CustomUserAuthenticationForm
+from .forms import CustomRegistrationForm, CustomUserAuthenticationForm, EditProfileForm, PasswordChangingForm
 from MarketApp.forms import SellForm
 
 from .models import CustomUser
@@ -12,6 +12,11 @@ from ItemApp.models import UserItemInterface
 from MarketApp.models import SellOffer
 
 from itertools import chain
+
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.views import generic
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordChangeView
 
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
@@ -91,9 +96,9 @@ def render_login_page(request):
         form = CustomUserAuthenticationForm(request.POST)
 
         if form.is_valid():
-            email = request.POST['email']
+            username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
 
             if user:
                 login(request, user)
@@ -108,3 +113,16 @@ def render_login_page(request):
 
     return render(request, 'login-page/login-page.html', context)
 
+
+class UserEditView(generic.UpdateView):
+    form_class = EditProfileForm
+    template_name = 'edit-page/edit.html'
+    success_url = reverse_lazy('main')
+
+    def  get_object(self):
+        return self.request.user
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('main')

@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser):
 
     email = models.EmailField(verbose_name="email", unique=True, max_length=60)
 
-    image = models.ImageField(blank=True, null=True, upload_to='images/', default='images/_7XI8ec0_400x400.jpg')
+    image = models.ImageField(blank=True, null=True, upload_to='images/', default='images/ProfilePicture.png')
 
     friends = models.ManyToManyField("self", blank=True, null=True)
 
@@ -61,8 +61,8 @@ class CustomUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'  # поле яке застосовується при заході в аккаунт
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'  # поле яке застосовується при заході в аккаунт
+    REQUIRED_FIELDS = ['email']
 
     objects = CustomAccountManager()
 

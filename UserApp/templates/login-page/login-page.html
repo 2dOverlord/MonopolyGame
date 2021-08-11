@@ -27,9 +27,9 @@
                     {% csrf_token %}
                     <div class="input-group mb-3">
                         <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        {{login_form.email}}
+                        {{login_form.username}}
                         </div>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
@@ -64,7 +64,7 @@
 		//Query All input fields
 		var form_fields = document.getElementsByTagName('input')
 		
-		form_fields[1].placeholder='Email..';
+		form_fields[1].placeholder='Username..';
 		form_fields[2].placeholder='Enter password...';
 		
 
