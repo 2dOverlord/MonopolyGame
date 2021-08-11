@@ -36,12 +36,12 @@
                     </h6>
                 </div>
                 <div class="market-lots-groups">
-                    {% for item in items %}
+                    {% for offer in offers %}
                     <div class="market-lot">
-                        <img class="item-image" src="{{ item.image.url }}" width="90" height="90">
+                        <img class="item-image" src="{{ offer.item.image.url }}" width="90" height="90">
                         <div class="item-description">
                             <h4 class="item-h4">
-                                {{ item.name }}
+                                {{ offer.item.name }}
                             </h4>
                             <h6 class="item-h6">
                                 Some item description
@@ -52,7 +52,7 @@
 {#                                {{ item.icount }}#}
                             </h6>
                             <h6 class="item-price">
-                                От {{ item.price }}
+                                {{ offer.price }}
                                 <button type="button" class="btn btn-success">Купить</button>
                             </h6>
 

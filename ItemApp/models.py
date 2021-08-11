@@ -78,6 +78,10 @@ class UserItemInterface(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     @classmethod
+    def get_interface_by_id(cls, interface_id):
+        return cls.objects.get(id=interface_id)
+
+    @classmethod
     def get_items_by_user(cls, user):
         objects = cls.objects.filter(user=user)
 

@@ -46,30 +46,7 @@
                             {{ obj.item.name }}
                             <p></p>
                         {% if user == object and user.is_authenticated %}
-                            <input type="button" id="hider{{ obj.item.id }}" class="btn btn-success" value="SELL" />
-                            <div id="popup{{ obj.item.id }}" class="popup" hidden>
-                                <div class="inner__block">
-                                    <input type="button" id="closer{{ obj.item.id }}" class="btn btn-danger" value="CLOSE"/>
-                                    {{ obj.item.item_name }}
-                                    <form action="/sellitem/{{ obj.item.id }}" method="POST">
-                                        {% csrf_token %}
-                                        {{ form.price }}
-                                        {{ form.item_id }}
-                                        <input type="submit" id="submitsell" value="Submit">
-                                        <script>
-                                            document.getElementById('hider{{ obj.item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ obj.item.id }}').hidden = false;
-                                            }
-                                        </script>
-                                        <script>
-                                            document.getElementById('closer{{ obj.item.id }}').onclick = function () {
-                                                document.getElementById('popup{{ obj.item.id }}').hidden = true;
-                                            }
-                                        </script>
-                                    </form>
-                                </div>
-                            </div>
-
+                            <input type="button" id="hider{{ obj.id }}" class="btn btn-success" value="SELL" />
                         {% endif %}
                         </div>
 
@@ -77,6 +54,32 @@
                     {% endfor %}
                     </div>
                 {% endfor %}
+            <div>
+                {% for id in ids %}
+                     <div id="popup{{ id }}" class="popup" hidden>
+                                <div class="inner__block">
+                                    <input type="button" id="closer{{ id }}" class="btn btn-danger" value="CLOSE"/>
+
+                                    <form action="/sellitem/{{ id }}" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.price }}
+                                        {{ form.interface_id }}
+                                        <input type="submit" id="submitsell" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
+                <script>
+                    document.getElementById('hider{{ id }}').onclick = function () {
+                        document.getElementById('popup{{ id }}').hidden = false;
+                    }
+                </script>
+                <script>
+                    document.getElementById('closer{{ id }}').onclick = function () {
+                        document.getElementById('popup{{ id }}').hidden = true;
+                    }
+                </script>
+                {% endfor %}
+            </div>
             </div>
         </div>
     </div>

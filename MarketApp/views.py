@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from ItemApp.models import Item
+from .models import SellOffer
 
 def render_market_page(request):
-    items = Item.get_all_on_sale_items()
+    offers = SellOffer.objects.all()
     context = {
-        'items': items
+        'offers': offers
     }
     return render(request, 'market-page/market-page.html', context)
