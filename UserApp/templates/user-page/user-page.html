@@ -14,10 +14,17 @@
 {% endblock %}
 
 {% block body %}
+
+
     <div class="MainBlock">
             <div class="profile-info">
                 <div class="avatar">
-                    <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
+                    {% if request.user.is_authenticated %}
+                        <img class="avatar-image" height="200px" width="200px" src="{{ object.image.url }}">
+                    {% else %}
+                         <img class="avatar-image" height="200px" width="200px" src="{% static '/images/ProfilePicture.png' %}">
+                    {% endif %}
+                    
                 </div>
                 <div>
                     <h6 class="profile-info-h6">
@@ -37,11 +44,7 @@
                 {% for line in inventory %}
                     <div class="line">
                     {% for obj in line %}
-
-                    <div class="inventory-item-place">
-
                         <img src="{{ obj.item.image.url }}" class="inventory-item-image">
-
                         <div class="inventory-item-name">
                             {{ obj.item.name }}
                             <p></p>
