@@ -1,2 +1,4 @@
 psycopg2 == 2.9.1
 Django == 3.2.5
+six
+django-allauth

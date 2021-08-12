@@ -8,7 +8,10 @@ from .forms import CustomRegistrationForm, CustomUserAuthenticationForm, EditPro
 from MarketApp.forms import SellForm
 
 from .models import CustomUser
-from ItemApp.models import Item
+from ItemApp.models import UserItemInterface
+from MarketApp.models import SellOffer
+
+from itertools import chain
 
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.views import generic
@@ -30,6 +33,7 @@ from .tokens import account_activation_token
 from django.http import HttpResponse
 
 
+
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
 
@@ -38,14 +42,18 @@ def render_user_page(request, user_id=1):
 
     user_object = CustomUser.get_user_by_id(user_id=user_id)
 
-    inventory = Item.get_items_by_owner(owner=user_object)
-    inventory = [inventory[i:i+6] for i in range(0, len(inventory), 6)]
+    inventory = UserItemInterface.get_items_by_user(user=user_object)
+    ids = [obj.id for obj in inventory]
+    inventory = [[obj] * obj.quantity for obj in inventory]
+    inventory = list(chain(*inventory))
+    inventory = [inventory[i:i + 6] for i in range(0, len(inventory), 6)]
 
     form = SellForm()
 
     context = {
         "object": user_object,
         "inventory": list(inventory),
+        "ids": ids,
         "form": form,
     }
 
@@ -58,10 +66,10 @@ def sell_item(request, item_id):
 
         if form.is_valid():
             item_price = form.cleaned_data['price']
-            Item.put_item_on_market(item_id, item_price)
-            owner_id = Item.get_owner_id_by_item_id(item_id)
+            obj = SellOffer.make_offer(price=item_price, interface_id=item_id)
+            user_id = obj.user.id
 
-    return HttpResponseRedirect(f'/user/{owner_id}')
+    return HttpResponseRedirect(f'/user/{user_id}')
 
 
 def render_register_page(request):
@@ -70,7 +78,6 @@ def render_register_page(request):
     if request.POST:
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
-            
             user = form.save(commit=False)
             user.is_active = False
             user.save()
@@ -92,6 +99,7 @@ def render_register_page(request):
             email.send()
             form.save()
             messages.success(request, 'Account was created for ' + username)
+
             return redirect('main')
 
         else:
@@ -139,6 +147,7 @@ def render_login_page(request):
 
     return render(request, 'login-page/login-page.html', context)
 
+
 class UserEditView(generic.UpdateView):
     form_class = EditProfileForm
     template_name = 'edit-page/edit.html'
@@ -151,6 +160,7 @@ class UserEditView(generic.UpdateView):
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
     success_url = reverse_lazy('main')
+
 
 def activate(request, uidb64, token):
     try:
@@ -166,3 +176,4 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+

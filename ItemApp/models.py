@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count
+from django.db.models import Min
 
 from UserApp.models import CustomUser
 
@@ -30,16 +32,16 @@ class Item(models.Model):
         max_length=30,
     )
 
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-    on_sale = models.BooleanField(default=False, null=False)
-    price = models.DecimalField(decimal_places=2, null=True, blank=True, max_digits=5)
-
     image = models.ImageField(null=True, blank=True, upload_to='images/')
 
-    @classmethod
-    def get_items_by_owner(cls, owner):
-        return cls.objects.filter(owner=owner)
+    def get_values(self):
+        data = {
+            'name': self.name,
+            'type': self.type,
+            'rarity': self.rarity,
+            'image_url': self.image.url
+        }
+        return data
 
     @classmethod
     def get_item_by_id(cls, item_id=1):
@@ -61,3 +63,26 @@ class Item(models.Model):
         owner_id = item.owner.get_id()
 
         return owner_id
+
+    @classmethod
+    def get_all_on_sale_items(cls):
+        items = cls.objects.filter(on_sale=True).aggregate(price=Min('price'))
+
+        return items
+
+
+class UserItemInterface(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    quantity = models.PositiveIntegerField(default=1)
+
+    @classmethod
+    def get_interface_by_id(cls, interface_id):
+        return cls.objects.get(id=interface_id)
+
+    @classmethod
+    def get_items_by_user(cls, user):
+        objects = cls.objects.filter(user=user)
+
+        return objects
