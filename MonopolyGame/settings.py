@@ -176,10 +176,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'UserApp.CustomUser'
 
-#SMTP Configurations
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'footballmonopolyonline@gmail.com'
 EMAIL_HOST_PASSWORD = 'FootballMonopolyOnline111@'
+EMAIL_PORT = 587

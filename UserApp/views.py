@@ -21,7 +21,14 @@ from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeEr
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
-from .utils import token_generator
+
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.conf import settings
+
+from .tokens import account_activation_token
+from django.http import HttpResponse
+
 
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
@@ -62,30 +69,29 @@ def render_register_page(request):
 
     if request.POST:
         form = CustomRegistrationForm(request.POST)
-
         if form.is_valid():
-            user = form.cleaned_data.get('username')
-            email = request.POST['email']
-            form.email_verified = False
-            form.save()
-            email_subject = 'Activate your account'
+            
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            username = form.cleaned_data.get('username')
 
-            # path to view
-            uidb64 = urlsafe_base64_encode(force_bytes(form.pk))
-
-            domain = get_current_site(request).domain
-            link = reverse('activate', kwargs={'uidb64' : uidb64, 'token' : token_generator.make_token(form)})
-            activate_url = 'http://' + domain + link
-
-            email_body = 'Hi ' + user + 'Please use this link to verify your account \n' + activate_url
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your blog account.'
+            message = render_to_string('acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':account_activation_token.make_token(user),
+            })
+            to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                email_subject,
-                email_body,
-                'noreply@gmail.com',
-                [email],
+                        mail_subject, message, to=[to_email]
             )
-            email.send(fail_silently=False)
-            messages.success(request, 'Account was created for ' + user)
+            email.content_subtype = 'html'
+            email.send()
+            form.save()
+            messages.success(request, 'Account was created for ' + username)
             return redirect('main')
 
         else:
@@ -146,21 +152,17 @@ class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
     success_url = reverse_lazy('main')
 
-
-class VerificationView(View):
-    def get(self, request, uidb64, token):
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = CustomUser.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
         
-            id = force_text(urlsafe_base64_decode(uidb64))  # Probles somewhere here
-            user = CustomUser.objects.get(pk=id)
-
-            if user.email_verified:
-                return redirect('login')
-            user.email_verified = True
-            user.save()
-            
-            messages.success(request, 'Account activated successfully')
-            return redirect('login')
-
-        
-
-            return redirect('login')
+        user.save()
+        login(request, user)
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
