@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     {% if user == object and user.is_authenticated %}
-                        <button type="button" class="btn btn-warning">✏</button>
+                        <a class="me-4 py-2 text-dark text-decoration-none" href="{% url 'edit' %}">✏</a>
                         <a class="btn btn-danger" href="{% url 'logout' %}">❌</a>
                     {% endif %}
                 </div>
