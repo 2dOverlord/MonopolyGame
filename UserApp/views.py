@@ -18,6 +18,14 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 
+from django.core.mail import EmailMessage
+from django.views import View
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from .utils import token_generator
+
 def render_main_page(request):
     return render(request, template_name='main-page/main-page.html')
 
@@ -63,8 +71,27 @@ def render_register_page(request):
         form = CustomRegistrationForm(request.POST)
 
         if form.is_valid():
-            form.save()
             user = form.cleaned_data.get('username')
+            email = request.POST['email']
+            form.email_verified = False
+            form.save()
+            email_subject = 'Activate your account'
+
+            # path to view
+            uidb64 = urlsafe_base64_encode(force_bytes(form.pk))
+
+            domain = get_current_site(request).domain
+            link = reverse('activate', kwargs={'uidb64': uidb64, 'token': token_generator.make_token(form)})
+            activate_url = 'http://' + domain + link
+
+            email_body = 'Hi ' + user + 'Please use this link to verify your account \n' + activate_url
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                'noreply@gmail.com',
+                [email],
+            )
+            email.send(fail_silently=False)
             messages.success(request, 'Account was created for ' + user)
             return redirect('main')
 
@@ -126,3 +153,18 @@ class UserEditView(generic.UpdateView):
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
     success_url = reverse_lazy('main')
+
+
+class VerificationView(View):
+    def get(self, request, uidb64, token):
+
+            id = force_text(urlsafe_base64_decode(uidb64))  # Probles somewhere here
+            user = CustomUser.objects.get(pk=id)
+
+            if user.email_verified:
+                return redirect('login')
+            user.email_verified = True
+            user.save()
+
+            messages.success(request, 'Account activated successfully')
+            return redirect('login')

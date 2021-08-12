@@ -23,5 +23,7 @@ urlpatterns = [
     path('', include('UserApp.urls')),
     path('market/', include('MarketApp.urls')),
     path('games/', include('GameApp.urls')),
-    path('item/<int:item_id>', include('ItemApp.urls'))
+    path('item/<int:item_id>', include('ItemApp.urls')),
+    path('accounts/', include('allauth.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
