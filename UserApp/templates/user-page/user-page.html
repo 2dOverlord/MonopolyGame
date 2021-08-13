@@ -45,7 +45,7 @@
                     <div class="line">
                     {% for obj in line %}
                         <img src="{{ obj.item.image.url }}" class="inventory-item-image">
-                        <div class="inventory-item-name">
+                    <div class="inventory-item-name">
                             {{ obj.item.name }}
                             <p></p>
                         {% if user == object and user.is_authenticated %}

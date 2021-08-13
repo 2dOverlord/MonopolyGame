@@ -38,10 +38,10 @@
                 <div class="market-lots-groups">
                     {% for offer in offers %}
                     <div class="market-lot">
-                        <img class="item-image" src="{{ offer.item.image.url }}" width="90" height="90">
+                        <img class="item-image" src="{{ offer.item_image_url }}" width="90" height="90">
                         <div class="item-description">
                             <h4 class="item-h4">
-                                {{ offer.item.name }}
+                                {{ offer.item_name }}
                             </h4>
                             <h6 class="item-h6">
                                 Some item description
@@ -49,10 +49,11 @@
                         </div>
                         <div class="item-count-price">
                             <h6 class="item-count">
-{#                                {{ item.icount }}#}
+                                {{ offer.dcount }}
                             </h6>
                             <h6 class="item-price">
-                                {{ offer.price }}
+                                От {{ offer.min_price }}
+                                <p></p>
                                 <button type="button" class="btn btn-success">Купить</button>
                             </h6>
 
