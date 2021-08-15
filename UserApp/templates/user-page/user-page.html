@@ -45,23 +45,22 @@
                     <div class="line">
                     {% for obj in line %}
                         <img src="{{ obj.item.image.url }}" class="inventory-item-image">
-                    <div class="inventory-item-name">
+                        <div class="inventory-item-name">
                             {{ obj.item.name }}
                             <p></p>
                         {% if user == object and user.is_authenticated %}
-                            <input type="button" id="hider{{ obj.id }}" class="btn btn-success" value="SELL" />
+                            <input type="button" id="hider{{ obj.id }}" class="btn btn-success {{ obj.id }}" value="SELL" />
                         {% endif %}
                         </div>
-
-                    </div>
                     {% endfor %}
+                    </div>
                     </div>
                 {% endfor %}
             <div>
                 {% for id in ids %}
                      <div id="popup{{ id }}" class="popup" hidden>
                                 <div class="inner__block">
-                                    <input type="button" id="closer{{ id }}" class="btn btn-danger" value="CLOSE"/>
+                                    <input type="button" id="closer{{ id }}" class="btn btn-danger {{ id }}" value="CLOSE"/>
 
                                     <form action="/sellitem/{{ id }}" method="POST">
                                         {% csrf_token %}
@@ -72,8 +71,11 @@
                                 </div>
                             </div>
                 <script>
-                    document.getElementById('hider{{ id }}').onclick = function () {
-                        document.getElementById('popup{{ id }}').hidden = false;
+                    var arr = document.getElementsByClassName('btn btn-success {{ id }}')
+                    for (i = 0, len = arr.length; i < len; i++){
+                        arr[i].onclick = function () {
+                            document.getElementById('popup{{ id }}').hidden = false;
+                            };
                     }
                 </script>
                 <script>
