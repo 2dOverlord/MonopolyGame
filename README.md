@@ -1,5 +1,6 @@
 # Online monopoly game
 
+### STATUS: NOT FINISHED 
 ----------------------
 This is pet-project to improve knowledge that are required on
 python web developer position
